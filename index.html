@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kenji.Ads — A IA que pilota o seu Google Ads</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0B0E11;--bg2:#11151A;--card:#161B21;--line:rgba(255,255,255,.08);
+    --txt:#F4F6F5;--muted:#9AA4AE;--accent:#00E676;--accent-d:#00C264;--warn:#FFC857;--danger:#FF6B6B;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--txt);font-family:'Inter',sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+  section{padding:88px 0}
+  .eyebrow{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.26em;color:var(--accent);margin-bottom:18px}
+  h1{font-size:clamp(38px,6vw,74px);font-weight:900;line-height:.99;letter-spacing:-.04em}
+  h2{font-size:clamp(30px,4.4vw,52px);font-weight:800;line-height:1.04;letter-spacing:-.035em;margin-bottom:18px}
+  h3{font-size:20px;font-weight:700;letter-spacing:-.02em;margin-bottom:10px}
+  p.lead{font-size:clamp(17px,2vw,21px);color:var(--muted);font-weight:500}
+  .accent{color:var(--accent)}.warn{color:var(--warn)}
+  .rule{width:64px;height:4px;background:var(--accent);border-radius:4px;margin:0 0 26px}
+  .btn{display:inline-flex;align-items:center;gap:10px;background:var(--accent);color:#04140B;font-weight:800;font-size:17px;padding:18px 34px;border-radius:12px;text-decoration:none;letter-spacing:-.01em;transition:.15s;border:none;cursor:pointer}
+  .btn:hover{background:var(--accent-d);transform:translateY(-2px)}
+  .btn-ghost{background:transparent;color:var(--txt);border:1px solid var(--line)}
+  .btn-ghost:hover{background:var(--card)}
+  .center{text-align:center}.center .rule{margin:0 auto 26px}.center p.lead{max-width:660px;margin:0 auto}
+
+  /* HERO */
+  .hero{background:radial-gradient(1200px 600px at 72% -10%,rgba(0,230,118,.12),transparent 60%);border-bottom:1px solid var(--line);padding:112px 0 88px}
+  .badge{display:inline-flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:8px 16px;font-size:13px;font-weight:600;color:var(--muted);margin-bottom:28px}
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent)}
+  .hero p.lead{max-width:640px;margin:24px 0 34px}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .price-tag{font-size:14px;color:var(--muted)}.price-tag b{color:var(--txt);font-size:18px}
+
+  /* TERMINAL */
+  .terminal{margin-top:60px;background:#0D1117;border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+  .term-bar{display:flex;align-items:center;gap:7px;padding:14px 18px;background:#11161D;border-bottom:1px solid var(--line)}
+  .term-bar i{width:12px;height:12px;border-radius:50%;display:inline-block}
+  .term-bar .r{background:#FF5F56}.term-bar .y{background:#FFBD2E}.term-bar .g{background:#27C93F}
+  .term-bar span{margin-left:12px;font-size:13px;color:var(--muted)}
+  .term-body{padding:26px;font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:14.5px;line-height:1.9;white-space:pre-wrap}
+  .term-body .u{color:var(--accent)}.term-body .c{color:#7D8893}.term-body .ai{color:var(--txt)}.term-body .hl{color:var(--warn)}.term-body .ok{color:var(--accent)}.term-body .q{color:#8AB4F8}
+
+  /* GRID */
+  .grid{display:grid;gap:18px}.g2{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(3,1fr)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:28px}
+  .card .ic{font-size:24px;margin-bottom:14px;display:block}
+  .card p{color:var(--muted);font-size:15px}
+  .cmd{font-family:ui-monospace,monospace;color:var(--accent);font-weight:700;font-size:15px}
+
+  /* COMPARE */
+  .compare{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:44px}
+  .compare .col{border-radius:16px;padding:30px;border:1px solid var(--line)}
+  .compare .old{background:var(--bg2)}
+  .compare .new{background:linear-gradient(160deg,rgba(0,230,118,.10),var(--card));border-color:rgba(0,230,118,.35)}
+  .compare h4{font-size:13px;text-transform:uppercase;letter-spacing:.2em;margin-bottom:20px;font-weight:800}
+  .compare .old h4{color:var(--muted)}.compare .new h4{color:var(--accent)}
+  .compare ul{list-style:none}.compare li{padding:9px 0 9px 28px;position:relative;color:#C9D0D7;font-size:15.5px}
+  .compare .old li::before{content:"✕";position:absolute;left:0;color:var(--danger);font-weight:800}
+  .compare .new li::before{content:"✓";position:absolute;left:0;color:var(--accent);font-weight:800}
+
+  /* STEPS row */
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:44px}
+  .steps .s{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px}
+  .steps .s .n{font-size:13px;font-weight:800;color:var(--accent);letter-spacing:.1em;margin-bottom:10px}
+  .steps .s p{color:var(--muted);font-size:14px}
+
+  /* HONEST box */
+  .honest{background:linear-gradient(160deg,rgba(255,200,87,.07),var(--card));border:1px solid rgba(255,200,87,.30);border-radius:18px;padding:38px}
+  .honest .h{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.18em;color:var(--warn);margin-bottom:14px}
+  .honest .two{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:22px}
+  .honest .two div{font-size:15px;color:#C9D0D7}
+  .honest .two b{color:var(--txt)}
+
+  /* PRICE */
+  .price{background:linear-gradient(160deg,rgba(0,230,118,.10),var(--card));border:1px solid rgba(0,230,118,.35);border-radius:22px;padding:52px;text-align:center;max-width:640px;margin:0 auto}
+  .price .old{font-size:20px;color:var(--muted);text-decoration:line-through}
+  .price .big{font-size:64px;font-weight:900;letter-spacing:-.04em;margin:6px 0}
+  .price .big small{font-size:26px;color:var(--muted);font-weight:700}
+  .price .sub{color:var(--muted);margin-bottom:26px}
+  .price ul{list-style:none;text-align:left;max-width:420px;margin:28px auto 0}
+  .price li{padding:9px 0 9px 30px;position:relative;color:#C9D0D7}
+  .price li::before{content:"✓";position:absolute;left:0;color:var(--accent);font-weight:800}
+  .guarantee{display:inline-flex;align-items:center;gap:10px;margin-top:28px;font-size:14px;color:var(--muted);background:var(--card);border:1px solid var(--line);padding:12px 20px;border-radius:999px}
+
+  /* FAQ */
+  .faq{max-width:820px;margin:44px auto 0}
+  .faq details{border-bottom:1px solid var(--line);padding:22px 0}
+  .faq summary{font-size:18px;font-weight:700;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::after{content:"+";color:var(--accent);font-weight:800;font-size:24px;line-height:1}
+  .faq details[open] summary::after{content:"–"}
+  .faq p{color:var(--muted);margin-top:14px;font-size:15.5px}
+
+  footer{border-top:1px solid var(--line);padding:56px 0;text-align:center;color:var(--muted);font-size:14px}
+  .up{margin-top:16px;font-size:14px;color:var(--muted)}
+  @media(max-width:820px){.compare,.honest .two,.steps{grid-template-columns:1fr}.g3,.g2{grid-template-columns:1fr}.steps{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div class="badge"><span class="dot"></span> Dentro do Claude Code · sem programar</div>
+    <div class="eyebrow">Kenji.Ads</div>
+    <h1>A IA que não só mostra<br>o problema. Ela <span class="accent">pilota</span><br>o seu Google Ads.</h1>
+    <p class="lead">Conecta na sua conta, encontra onde você está queimando dinheiro e — com o seu OK — <b style="color:var(--txt)">pausa campanha, corta e realoca budget ao vivo</b>. As negativas e as campanhas novas saem prontas em CSV. Tudo em minutos, direto no chat.</p>
+    <div class="hero-cta">
+      <a href="#comprar" class="btn">Quero pilotar minhas contas →</a>
+      <span class="price-tag">a partir de <b>R$97</b> · acesso vitalício</span>
+    </div>
+
+    <div class="terminal">
+      <div class="term-bar"><i class="r"></i><i class="y"></i><i class="g"></i><span>Claude Code — conta do cliente ao vivo</span></div>
+      <div class="term-body"><span class="u">você ›</span> <span class="q">otimiza a conta da Padaria São Jorge</span>
+
+<span class="ai">Li a conta ao vivo. Achei R$ 53/dia sangrando. Plano:</span>
+
+<span class="ai">AO VIVO (executo com teu OK):</span>
+<span class="hl">1. 🩸 PAUSAR campanha "Institucional" — R$412 em 14d, 0 conversão</span>
+<span class="hl">2. 💸 REALOCAR budget: −R$40/dia da campanha A → +R$40 na B</span>
+   <span class="c">B converte a R$18/lead, A a R$47/lead</span>
+
+<span class="ai">VIA CSV (pronto pro Editor):</span>
+<span class="ai">3. 🚫 NEGATIVAR "ração grátis" e +6 termos — ~R$210 desperdiçados</span>
+
+<span class="ai">Aprova os itens ao vivo (1 e 2)?</span>
+<span class="u">você ›</span> <span class="q">tudo</span>
+<span class="ok">✓ campanha pausada  ✓ budget realocado  ✓ CSV de negativas gerado</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section>
+  <div class="wrap center">
+    <div class="eyebrow">O problema</div>
+    <h2>Sua conta sangra dinheiro<br>enquanto você não tá olhando.</h2>
+    <p class="lead">Termo de busca irrelevante comendo verba. Campanha morta que ninguém pausou. Budget na campanha que converte pior. Você <b style="color:var(--txt)">sabe</b> que tem gordura pra cortar — mas revisar conta por conta, cliente por cliente, toma horas que você não tem.</p>
+  </div>
+</section>
+
+<!-- SHIFT -->
+<section style="background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <div class="eyebrow">A virada</div>
+    <h2>De "eu reviso quando der" para<br>"a IA revisa e age agora".</h2>
+    <div class="compare">
+      <div class="col old">
+        <h4>Sem o Kenji.Ads</h4>
+        <ul>
+          <li>Abrir o painel, filtrar, exportar, cruzar na planilha</li>
+          <li>Achar a sangria só depois que já queimou</li>
+          <li>Recomendação que morre no relatório — ninguém executa</li>
+          <li>1 conta = 40 min. 15 clientes = a tarde inteira</li>
+        </ul>
+      </div>
+      <div class="col new">
+        <h4>Com o Kenji.Ads</h4>
+        <ul>
+          <li>"Otimiza a conta X" — a IA lê ao vivo em segundos</li>
+          <li>Cada sangria com o número que justifica cortar</li>
+          <li>Pausa e budget executados na hora, com o seu OK</li>
+          <li>1 conta = minutos. Você vira o dia com sobra</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIFERENCIAL -->
+<section>
+  <div class="wrap center">
+    <div class="eyebrow">O diferencial</div>
+    <h2>A regra de ouro:<br>a IA propõe, você aprova, a IA executa.</h2>
+    <p class="lead">A maioria das ferramentas para na recomendação. O Kenji.Ads <b style="color:var(--txt)">executa de verdade</b> na conta — mas nunca sem o seu "OK" explícito, sempre mostrando o número que justifica, e registrando tudo no histórico. Você é o piloto. A IA é o copiloto que aperta os botões.</p>
+  </div>
+</section>
+
+<!-- 6 COMANDOS -->
+<section style="background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <div class="eyebrow">O que vem dentro</div>
+    <h2>6 comandos. Um piloto completo.</h2>
+    <div class="grid g3" style="margin-top:40px">
+      <div class="card"><span class="ic">🔍</span><h3><span class="cmd">/diagnostico</span></h3><p>O raio-x ao vivo da conta: gasto, CPL/CPA vs meta, campanhas que mais gastam, alertas e as sangrias. Só leitura.</p></div>
+      <div class="card"><span class="ic">⚡</span><h3><span class="cmd">/otimizar</span></h3><p>O coração. Propõe pausar, cortar e realocar budget — e, com seu OK, <b style="color:var(--txt)">executa ao vivo</b> na conta.</p></div>
+      <div class="card"><span class="ic">🚫</span><h3><span class="cmd">/negativar</span></h3><p>Varre os termos de busca, acha o gasto desperdiçado, agrupa por tema e entrega a lista + CSV pronto pro Editor.</p></div>
+      <div class="card"><span class="ic">🚀</span><h3><span class="cmd">/campanha-google</span></h3><p>Monta uma campanha de Search inteira a partir do briefing — keywords, RSAs, extensões, negativas — em CSV. Tudo pausado.</p></div>
+      <div class="card"><span class="ic">📄</span><h3><span class="cmd">/relatorio</span></h3><p>Relatório white-label com a sua marca, em linguagem de cliente. HTML ou PDF pra mandar no fim do mês.</p></div>
+      <div class="card"><span class="ic">📊</span><h3><span class="cmd">/dashboard</span></h3><p>Painel HTML interativo da conta — KPIs, gráficos e filtro de período. A peça "uau" pra reunião.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- HONEST -->
+<section>
+  <div class="wrap">
+    <div class="honest">
+      <div class="h">⚖️ O limite honesto (a gente não promete o que não entrega)</div>
+      <h3 style="font-size:26px">Executa ao vivo o que o Google libera. Entrega pronto o resto.</h3>
+      <div class="two">
+        <div><b class="accent">Ao vivo:</b><br>pausar e ativar campanha, ajustar e realocar budget. A IA faz na hora, com o seu OK.</div>
+        <div><b class="warn">Entregue em CSV:</b><br>pelo caminho padrão (Windsor), negativar palavras e criar campanha saem em CSV pra importar no Editor em 1 clique. Pela conexão via API direta, também rodam ao vivo.</div>
+      </div>
+      <p style="margin-top:22px;color:var(--muted);font-size:15px">Por que isso importa: você sabe exatamente o que a máquina faz sozinha e o que passa pela sua mão. Sem caixa-preta, sem susto na conta do cliente.</p>
+    </div>
+  </div>
+</section>
+
+<!-- COMO FUNCIONA -->
+<section style="background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap center">
+    <div class="eyebrow">Como começa</div>
+    <h2>Do clique de compra ao<br>primeiro diagnóstico em ~15 min.</h2>
+    <div class="steps">
+      <div class="s"><div class="n">PASSO 1</div><h3>Baixe</h3><p>Aceite o convite no GitHub e abra a pasta no VS Code com o Claude Code.</p></div>
+      <div class="s"><div class="n">PASSO 2</div><h3>Conecte</h3><p>Um conector só (Windsor.ai) liga a IA na sua conta de Google Ads. Sem OAuth manual.</p></div>
+      <div class="s"><div class="n">PASSO 3</div><h3>Instale</h3><p>Rode <span class="cmd">/instalar</span> — duas perguntas e o sistema fica com a sua cara.</p></div>
+      <div class="s"><div class="n">PASSO 4</div><h3>Pilote</h3><p><span class="cmd">/diagnostico</span> e <span class="cmd">/otimizar</span>. A IA lê, propõe e executa com o seu OK.</p></div>
+    </div>
+    <p class="up">Vem com um <b style="color:var(--txt)">guia visual passo a passo</b> (GUIA.html) — do zero, sem saber programar.</p>
+  </div>
+</section>
+
+<!-- PARA QUEM -->
+<section>
+  <div class="wrap center">
+    <div class="eyebrow">Pra quem é</div>
+    <h2>Feito pra quem vive de Google Ads.</h2>
+    <div class="grid g3" style="margin-top:40px;text-align:left">
+      <div class="card"><span class="ic">🎯</span><h3>Gestor de tráfego</h3><p>Toca várias contas e quer cortar o trabalho braçal de revisar cada uma na mão.</p></div>
+      <div class="card"><span class="ic">🏢</span><h3>Agência</h3><p>Quer padronizar a otimização e entregar relatório e dashboard bonitos com a marca da casa.</p></div>
+      <div class="card"><span class="ic">🛠️</span><h3>Dono de negócio</h3><p>Roda o próprio Google Ads e cansou de queimar verba em palavra errada sem perceber.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICE -->
+<section id="comprar" style="background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <div class="price">
+      <div class="eyebrow">Acesso vitalício</div>
+      <div class="old">de R$297</div>
+      <div class="big">R$97<small>/vitalício</small></div>
+      <div class="sub">Preço de lançamento. Pagou uma vez, é seu pra sempre.</div>
+      <a href="#" class="btn" style="font-size:18px;padding:20px 40px">Comprar o Kenji.Ads →</a>
+      <ul>
+        <li>Os 6 comandos completos (diagnóstico, otimizar, negativar, campanha, relatório, dashboard)</li>
+        <li>Execução ao vivo na conta — pausar e budget com o seu OK</li>
+        <li>Guia de instalação visual, passo a passo, sem código</li>
+        <li>Atualizações incluídas — o sistema evolui, você recebe</li>
+        <li>Multi-cliente: uma pasta e um histórico por conta</li>
+      </ul>
+      <div class="guarantee">🛡️ Garantia de 7 dias — não curtiu, devolvo seu dinheiro.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section>
+  <div class="wrap center">
+    <div class="eyebrow">Perguntas</div>
+    <h2>O que costumam perguntar.</h2>
+    <div class="faq" style="text-align:left">
+      <details open><summary>Preciso saber programar?</summary><p>Não. Você instala o VS Code + Claude Code (grátis, tutorial visual incluído), conecta a conta num clique e conversa por comandos. Nada de código, chave de API na mão ou planilha.</p></details>
+      <details><summary>A IA vai mexer na conta do meu cliente sozinha?</summary><p>Nunca sem o seu OK. A regra de ouro é inegociável: a IA propõe com o número que justifica, você aprova, e só então ela executa. Tudo fica registrado no histórico. Pausar e budget são reversíveis.</p></details>
+      <details><summary>Por que negativar e criar campanha saem em CSV?</summary><p>Pelo caminho padrão (Windsor.ai), o conector executa ao vivo só pausar/ativar campanha e budget — então negativar e criar campanha o sistema entrega em CSV pronto pro Google Ads Editor (1 clique). Se você conectar pela API direta do Google, essas ações também rodam ao vivo. Em vez de fingir, a gente é claro sobre cada caminho.</p></details>
+      <details><summary>Funciona com quantas contas?</summary><p>Quantas você quiser. Cada cliente vira uma pasta com metas e histórico próprios. Ideal pra quem toca uma carteira inteira.</p></details>
+      <details><summary>Preciso de assinatura do Claude?</summary><p>Sim — o Claude Code roda sobre a sua conta Claude (plano Pro ou superior, à parte). O Kenji.Ads é o sistema de skills que roda em cima dele.</p></details>
+      <details><summary>E o Meta Ads / conteúdo / SEO?</summary><p>Este produto é focado só em Google Ads, de propósito — mais simples de instalar e usar. Se você quer um sistema que cobre Meta Ads, conteúdo, SEO e gestão de agência também, existe a versão completa: o Kenji.OS.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="center" style="background:radial-gradient(1000px 500px at 50% 120%,rgba(0,230,118,.12),transparent 60%)">
+  <div class="wrap">
+    <h2>Pare de revisar conta na mão.<br>Deixe a IA pilotar.</h2>
+    <p class="lead" style="margin:18px auto 32px">Em 15 minutos você conecta a primeira conta e vê a IA achar — e cortar — a primeira sangria.</p>
+    <a href="#comprar" class="btn" style="font-size:18px;padding:20px 40px">Quero o Kenji.Ads →</a>
+    <p class="price-tag" style="margin-top:18px">R$97 · acesso vitalício · garantia de 7 dias</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p><b style="color:var(--txt)">Kenji.Ads</b> — o piloto de Google Ads dentro do Claude Code.</p>
+    <p style="margin-top:8px">A IA propõe → você aprova → a IA executa. Você é o piloto.</p>
+  </div>
+</footer>
+
+</body>
+</html>
