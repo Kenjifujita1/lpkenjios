@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proposta — Gestão de Google Ads</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#0B0E11;--bg2:#11151A;--card:#161B21;--line:rgba(255,255,255,.08);
+    --txt:#F4F6F5;--muted:#9AA4AE;--accent:#00E676;--accent-d:#00C264;--warn:#FFC857;--wa:#25D366}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--txt);font-family:'Inter',sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+  html,body{overflow-x:hidden;max-width:100%}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 24px}
+  section{padding:76px 0}
+  .eyebrow{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.24em;color:var(--accent);margin-bottom:16px}
+  h1{font-size:clamp(34px,5.6vw,64px);font-weight:900;line-height:1.03;letter-spacing:-.035em;text-wrap:balance;overflow-wrap:break-word}
+  h2{font-size:clamp(27px,4vw,44px);font-weight:800;line-height:1.08;letter-spacing:-.03em;margin-bottom:14px;text-wrap:balance;overflow-wrap:break-word}
+  h3{font-size:19px;font-weight:700;letter-spacing:-.02em;margin-bottom:8px}
+  p.lead{font-size:clamp(17px,2vw,21px);color:var(--muted);font-weight:500}
+  .accent{color:var(--accent)}.center{text-align:center}.center p.lead{max-width:680px;margin:0 auto}
+  .btn{display:inline-flex;align-items:center;gap:11px;background:var(--wa);color:#04140B;font-weight:800;font-size:18px;padding:19px 34px;border-radius:14px;text-decoration:none;letter-spacing:-.01em;transition:.15s;box-shadow:0 12px 34px rgba(37,211,102,.28)}
+  .btn:hover{transform:translateY(-2px);filter:brightness(1.05)}
+
+  .hero{background:radial-gradient(1100px 560px at 76% -10%,rgba(0,230,118,.14),transparent 62%);border-bottom:1px solid var(--line);padding:96px 0 76px}
+  .badge{display:inline-flex;align-items:center;gap:9px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:8px 16px;font-size:13px;font-weight:600;color:var(--muted);margin-bottom:26px}
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent)}
+  .hero p.lead{max-width:660px;margin:22px 0 0}
+
+  .grid{display:grid;gap:16px}.g2{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(3,1fr)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px}
+  .card .ic{font-size:24px;margin-bottom:12px;display:block}
+  .card p{color:var(--muted);font-size:15px}
+
+  .list{max-width:760px;margin:34px auto 0;text-align:left}
+  .list .it{display:flex;gap:16px;padding:18px 0;border-bottom:1px solid var(--line)}
+  .list .it:last-child{border-bottom:none}
+  .list .it .n{flex-shrink:0;width:34px;height:34px;border-radius:50%;background:rgba(0,230,118,.12);border:1px solid rgba(0,230,118,.35);color:var(--accent);display:grid;place-items:center;font-weight:800;font-size:15px}
+  .list .it h3{margin-bottom:4px}
+  .list .it p{color:var(--muted);font-size:15px}
+
+  .result{background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .result .g2{margin-top:36px;text-align:left}
+  .result .card{background:linear-gradient(160deg,rgba(0,230,118,.07),var(--card));border-color:rgba(0,230,118,.22)}
+
+  /* preço */
+  .price{background:linear-gradient(160deg,rgba(0,230,118,.10),var(--card));border:1px solid rgba(0,230,118,.35);border-radius:24px;padding:52px 40px;text-align:center;max-width:680px;margin:0 auto}
+  .price .lbl{font-size:14px;font-weight:800;text-transform:uppercase;letter-spacing:.18em;color:var(--muted)}
+  .price .big{font-size:clamp(52px,10vw,80px);font-weight:900;letter-spacing:-.04em;line-height:1;margin:8px 0}
+  .price .big small{font-size:26px;color:var(--muted);font-weight:700}
+  .price .inc{display:inline-flex;align-items:center;gap:8px;background:rgba(0,230,118,.12);border:1px solid rgba(0,230,118,.35);color:var(--accent);font-weight:800;font-size:15px;padding:8px 18px;border-radius:999px;margin-top:6px}
+  .price ul{list-style:none;text-align:left;max-width:440px;margin:28px auto 0}
+  .price li{padding:11px 0 11px 32px;position:relative;color:#D4DAE0;font-size:16px}
+  .price li::before{content:"✓";position:absolute;left:0;color:var(--accent);font-weight:900;font-size:20px}
+  .price .obs{margin-top:24px;font-size:14px;color:var(--muted);max-width:460px;margin-left:auto;margin-right:auto}
+
+  /* garantia / saídas */
+  .teste{background:linear-gradient(160deg,rgba(255,200,87,.06),var(--card));border:1px solid rgba(255,200,87,.28);border-radius:24px;padding:48px 40px;max-width:820px;margin:0 auto}
+  .teste .h{font-size:14px;font-weight:800;text-transform:uppercase;letter-spacing:.18em;color:var(--warn);margin-bottom:12px}
+  .teste .big{font-size:clamp(30px,5vw,46px);font-weight:900;letter-spacing:-.03em;line-height:1.05;margin-bottom:14px;text-wrap:balance}
+  .teste .sub{color:#D4DAE0;font-size:18px;max-width:560px}
+  .saidas{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:32px;text-align:left}
+  .saidas .s{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px}
+  .saidas .s .t{font-weight:800;font-size:16px;margin-bottom:6px}
+  .saidas .s p{color:var(--muted);font-size:14px}
+  .saidas .s.go{border-color:rgba(0,230,118,.4)}.saidas .s.go .t{color:var(--accent)}
+
+  footer{border-top:1px solid var(--line);padding:52px 0;text-align:center;color:var(--muted);font-size:14px}
+  footer b{color:var(--txt)}
+  @media(max-width:820px){.g3,.saidas{grid-template-columns:1fr}.result .g2{grid-template-columns:1fr}}
+  @media(max-width:640px){section{padding:58px 0}.hero{padding:76px 0 58px}.price,.teste{padding:34px 22px}.g2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div class="badge"><span class="dot"></span> Proposta · Gestão de Google Ads</div>
+    <h1>Melhorando o seu posicionamento no Google — e colocando sua empresa na <span class="accent">Rede de Pesquisa</span>.</h1>
+    <p class="lead">Coloco o seu negócio na frente de quem já está procurando o que você vende. Anúncios estruturados, otimizados toda semana, com foco em trazer cliente de verdade pro seu WhatsApp — não em gastar por gastar.</p>
+  </div>
+</section>
+
+<!-- O QUE EU VOU FAZER -->
+<section>
+  <div class="wrap center">
+    <div class="eyebrow">O que eu vou fazer</div>
+    <h2>A gestão completa da sua conta, do zero ao resultado.</h2>
+    <p class="lead">Você não precisa entender de Google Ads. Eu cuido de cada parte:</p>
+    <div class="list">
+      <div class="it"><div class="n">1</div><div><h3>Estruturação da conta e das campanhas</h3><p>Monto a campanha de Pesquisa do jeito certo, organizada por grupos de assunto — a base pra tudo funcionar e o clique sair mais barato.</p></div></div>
+      <div class="it"><div class="n">2</div><div><h3>Pesquisa de palavras-chave</h3><p>Descubro exatamente o que o seu cliente digita no Google quando quer o que você vende — e miro nesses termos.</p></div></div>
+      <div class="it"><div class="n">3</div><div><h3>Criação dos anúncios</h3><p>Escrevo os títulos e descrições que aparecem no Google, feitos pra chamar atenção e gerar contato.</p></div></div>
+      <div class="it"><div class="n">4</div><div><h3>Segmentação certa</h3><p>Configuro a região, os horários e o público pra você aparecer só pra quem interessa — sem desperdiçar verba.</p></div></div>
+      <div class="it"><div class="n">5</div><div><h3>Negativação de termos</h3><p>Bloqueio buscas que só queimam dinheiro (curiosos, "grátis", concorrentes) pra sua verba ir só pra quem compra.</p></div></div>
+      <div class="it"><div class="n">6</div><div><h3>Configuração de conversões</h3><p>Instalo o rastreamento pra medir cada ligação e clique no WhatsApp — assim a gente sabe o que dá resultado de verdade.</p></div></div>
+      <div class="it"><div class="n">7</div><div><h3>Otimização toda semana</h3><p>Acompanho os números, corto o que não converte e reforço o que traz cliente. É trabalho contínuo, não "cria e esquece".</p></div></div>
+      <div class="it"><div class="n">8</div><div><h3>Extensões e melhorias</h3><p>Adiciono botões de site, telefone, WhatsApp e diferenciais pro seu anúncio ocupar mais espaço e converter mais.</p></div></div>
+      <div class="it"><div class="n">9</div><div><h3>Relatórios de acompanhamento</h3><p>Você recebe, em linguagem simples, o que está acontecendo: quanto investiu, quantos contatos chegaram e o que vem a seguir.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ESTRATÉGIA -->
+<section style="background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap center">
+    <div class="eyebrow">Como eu trabalho</div>
+    <h2>Minha estratégia com o Google Ads.</h2>
+    <p class="lead">Não é apertar botão e torcer. É método:</p>
+    <div class="grid g3" style="margin-top:40px;text-align:left">
+      <div class="card"><span class="ic">🎯</span><h3>Foco em intenção</h3><p>Priorizo a Rede de Pesquisa — quem já está procurando você agora, com a mão na carteira. É o público de maior chance de fechar.</p></div>
+      <div class="card"><span class="ic">📊</span><h3>Decisão por dados</h3><p>Toda mudança é baseada em número real da conta. Se um termo gasta e não traz cliente, ele cai. Nada de achismo.</p></div>
+      <div class="card"><span class="ic">🧪</span><h3>Teste constante</h3><p>Testo anúncios diferentes pra descobrir o que mais converte e ir baixando o custo por contato ao longo do tempo.</p></div>
+      <div class="card"><span class="ic">🚀</span><h3>Começar e escalar</h3><p>Começo enxuto pra validar, e aumento a verba só no que está dando retorno. Seu dinheiro cresce onde já funciona.</p></div>
+      <div class="card"><span class="ic">🛡️</span><h3>Você no controle</h3><p>Você aprova o que vai ao ar e enxerga os resultados. Transparência total — sem caixa-preta.</p></div>
+      <div class="card"><span class="ic">⚡</span><h3>Tecnologia de ponta</h3><p>Uso inteligência artificial pra vasculhar a conta e achar desperdício e oportunidade que passariam batido no olho.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- RESULTADO -->
+<section class="result">
+  <div class="wrap center">
+    <div class="eyebrow">O resultado que vamos buscar</div>
+    <h2>Mais clientes chegando, de forma previsível.</h2>
+    <p class="lead">O objetivo não é aparecer no Google — é o telefone tocar. Vamos trabalhar por:</p>
+    <div class="grid g2">
+      <div class="card"><h3>📈 Mais contatos qualificados</h3><p>Pessoas com real intenção de compra chamando você direto no WhatsApp, todos os dias.</p></div>
+      <div class="card"><h3>🥇 Presença no topo</h3><p>Sua empresa aparecendo lá em cima quando alguém busca o seu serviço — na frente do concorrente.</p></div>
+      <div class="card"><h3>💰 Custo por cliente menor</h3><p>Com a otimização semanal, o valor pra conquistar cada cliente tende a cair mês a mês.</p></div>
+      <div class="card"><h3>🔁 Demanda previsível</h3><p>Uma "torneira" de clientes que você abre e ajusta conforme a sua capacidade de atender.</p></div>
+    </div>
+    <p class="lead" style="margin-top:34px;font-size:16px;max-width:640px;margin-left:auto;margin-right:auto">Sendo honesto: resultado em tráfego pago se constrói com dados e ajuste. Por isso os primeiros 30 dias são de teste — pra provar na prática, sem você assumir risco.</p>
+  </div>
+</section>
+
+<!-- INVESTIMENTO -->
+<section>
+  <div class="wrap">
+    <div class="center" style="margin-bottom:44px">
+      <div class="eyebrow">O investimento</div>
+      <h2>Simples e sem pegadinha.</h2>
+    </div>
+    <div class="price">
+      <div class="lbl">Gestão mensal</div>
+      <div class="big">R$850<small>/mês</small></div>
+      <div class="inc">✓ com o seu site incluso</div>
+      <ul>
+        <li>Gestão completa da conta de Google Ads</li>
+        <li>Criação da sua página de venda (site) — incluída no valor</li>
+        <li>Otimização e acompanhamento toda semana</li>
+        <li>Configuração de rastreamento e relatórios</li>
+        <li>Você aprova tudo e enxerga os resultados</li>
+      </ul>
+      <p class="obs">A <b style="color:var(--txt)">verba de anúncios (mídia)</b> é definida junto com você e vai direto pro Google — à parte da gestão. Você escolhe quanto investir e ajusta quando quiser.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 30 DIAS -->
+<section style="background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <div class="teste center">
+      <div class="h">🛡️ 30 dias de teste — risco é meu</div>
+      <div class="big">Teste por 30 dias. No fim, <span class="accent">você decide</span>.</div>
+      <p class="sub" style="margin:0 auto">A gente coloca tudo pra rodar e você acompanha. Ao final dos 30 dias, a escolha é 100% sua — sem amarra, sem multa, sem letra miúda:</p>
+      <div class="saidas">
+        <div class="s go"><div class="t">✅ Seguir com a gestão</div><p>Gostou do resultado? A gente continua no ritmo, otimizando mês a mês pra trazer mais cliente.</p></div>
+        <div class="s"><div class="t">🛑 Encerrar sem custo</div><p>Não quis seguir? Tiro a página do ar e pauso o Google Ads. Simples assim — você não fica preso a nada.</p></div>
+        <div class="s"><div class="t">🔑 Comprar os direitos</div><p>Quer ficar com o site e a implementação que eu construí? Você compra os direitos e leva tudo com você.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="center" style="background:radial-gradient(1000px 500px at 50% 120%,rgba(0,230,118,.14),transparent 60%)">
+  <div class="wrap">
+    <h2>Bora colocar sua empresa na frente no Google?</h2>
+    <p class="lead" style="margin:18px auto 32px">Começamos hoje o teste de 30 dias. Em pouco tempo os primeiros contatos já chegam no seu WhatsApp.</p>
+    <a href="https://wa.me/5544999271916?text=Oi!%20Topei%20a%20proposta%20de%20Google%20Ads%20-%20bora%20come%C3%A7ar" class="btn">💬 Quero começar o teste</a>
+    <p style="margin-top:16px;font-size:20px;font-weight:800;color:var(--txt)">📱 (44) 99927-1916</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p><b>Proposta de Gestão de Google Ads</b> — R$850/mês, com site incluso.</p>
+    <p style="margin-top:8px">30 dias de teste · você só paga a mídia · sem fidelidade</p>
+  </div>
+</footer>
+
+</body>
+</html>
