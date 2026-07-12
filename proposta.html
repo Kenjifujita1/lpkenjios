@@ -56,6 +56,16 @@
   .price li{padding:11px 0 11px 32px;position:relative;color:#D4DAE0;font-size:16px}
   .price li::before{content:"✓";position:absolute;left:0;color:var(--accent);font-weight:900;font-size:20px}
   .price .obs{margin-top:24px;font-size:14px;color:var(--muted);max-width:460px;margin-left:auto;margin-right:auto}
+  .pcard{background:linear-gradient(160deg,rgba(0,230,118,.08),var(--card));border:1px solid rgba(0,230,118,.3);border-radius:20px;padding:34px 30px;text-align:center}
+  .pcard .lbl{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.14em;color:var(--muted)}
+  .pcard .big2{font-size:clamp(42px,7vw,58px);font-weight:900;letter-spacing:-.04em;line-height:1;margin:8px 0 2px}
+  .pcard .big2 small{font-size:18px;color:var(--muted);font-weight:700}
+  .pcard .tagline{font-size:13px;color:var(--accent);font-weight:800;margin-bottom:12px}
+  .pcard ul{list-style:none;text-align:left;margin-top:16px}
+  .pcard li{padding:8px 0 8px 26px;position:relative;color:#D4DAE0;font-size:14.5px}
+  .pcard li::before{content:"✓";position:absolute;left:0;color:var(--accent);font-weight:900}
+  .sopaga{max-width:720px;margin:26px auto 0;text-align:center;background:var(--card);border:1px dashed rgba(0,230,118,.4);border-radius:14px;padding:18px 22px;font-size:15px;color:#D4DAE0}
+  .sopaga b{color:var(--accent)}
 
   /* garantia / saídas */
   .teste{background:linear-gradient(160deg,rgba(255,200,87,.06),var(--card));border:1px solid rgba(255,200,87,.28);border-radius:24px;padding:48px 40px;max-width:820px;margin:0 auto}
@@ -145,19 +155,31 @@
       <div class="eyebrow">O investimento</div>
       <h2>Simples e sem pegadinha.</h2>
     </div>
-    <div class="price">
-      <div class="lbl">Gestão mensal</div>
-      <div class="big">R$850<small>/mês</small></div>
-      <div class="inc">✓ com o seu site incluso</div>
-      <ul>
-        <li>Gestão completa da conta de Google Ads</li>
-        <li>Criação da sua página de venda (site) — incluída no valor</li>
-        <li>Otimização e acompanhamento toda semana</li>
-        <li>Configuração de rastreamento e relatórios</li>
-        <li>Você aprova tudo e enxerga os resultados</li>
-      </ul>
-      <p class="obs">A <b style="color:var(--txt)">verba de anúncios (mídia)</b> é definida junto com você e vai direto pro Google — à parte da gestão. Você escolhe quanto investir e ajusta quando quiser.</p>
+    <div class="grid g2" style="max-width:760px;margin:0 auto">
+      <div class="pcard">
+        <div class="lbl">Gestão do Google Ads</div>
+        <div class="big2">R$750<small>/mês</small></div>
+        <div class="tagline">a partir do 2º mês, se você continuar</div>
+        <ul>
+          <li>Gestão completa da conta de Google Ads</li>
+          <li>Otimização e acompanhamento toda semana</li>
+          <li>Configuração de rastreamento e relatórios</li>
+          <li>Você aprova tudo e enxerga os resultados</li>
+        </ul>
+      </div>
+      <div class="pcard">
+        <div class="lbl">Landing page (seu site)</div>
+        <div class="big2">R$1.000<small> único</small></div>
+        <div class="tagline">só se você quiser ficar com o site</div>
+        <ul>
+          <li>Página de venda profissional, feita pra converter</li>
+          <li>Otimizada pra celular e pro anúncio</li>
+          <li>Você leva o site e os direitos com você</li>
+          <li>Valor único — não é mensalidade</li>
+        </ul>
+      </div>
     </div>
+    <div class="sopaga">💡 <b>Valores separados e só cobrados se você decidir seguir</b> — a gestão (R$750/mês) se continuar depois do teste, e a landing (R$1.000) só se quiser ficar com ela. Nos 30 dias de teste, você paga <b>só a mídia</b> que vai pro Google.</div>
   </div>
 </section>
 
@@ -169,9 +191,9 @@
       <div class="big">Teste por 30 dias. No fim, <span class="accent">você decide</span>.</div>
       <p class="sub" style="margin:0 auto">A gente coloca tudo pra rodar e você acompanha. Ao final dos 30 dias, a escolha é 100% sua — sem amarra, sem multa, sem letra miúda:</p>
       <div class="saidas">
-        <div class="s go"><div class="t">✅ Seguir com a gestão</div><p>Gostou do resultado? A gente continua no ritmo, otimizando mês a mês pra trazer mais cliente.</p></div>
+        <div class="s go"><div class="t">✅ Seguir com a gestão — R$750/mês</div><p>Gostou do resultado? A gente continua no ritmo, otimizando mês a mês pra trazer mais cliente.</p></div>
         <div class="s"><div class="t">🛑 Encerrar sem custo</div><p>Não quis seguir? Tiro a página do ar e pauso o Google Ads. Simples assim — você não fica preso a nada.</p></div>
-        <div class="s"><div class="t">🔑 Comprar os direitos</div><p>Quer ficar com o site e a implementação que eu construí? Você compra os direitos e leva tudo com você.</p></div>
+        <div class="s"><div class="t">🔑 Ficar com o site — R$1.000</div><p>Quer manter a landing que eu construí? Você compra os direitos (valor único) e leva o site com você.</p></div>
       </div>
     </div>
   </div>
@@ -189,8 +211,8 @@
 
 <footer>
   <div class="wrap">
-    <p><b>Proposta de Gestão de Google Ads</b> — R$850/mês, com site incluso.</p>
-    <p style="margin-top:8px">30 dias de teste · você só paga a mídia · sem fidelidade</p>
+    <p><b>Proposta de Gestão de Google Ads</b> — R$750/mês (gestão) · R$1.000 (landing, opcional).</p>
+    <p style="margin-top:8px">30 dias de teste · só paga se continuar ou comprar · sem fidelidade</p>
   </div>
 </footer>
 
