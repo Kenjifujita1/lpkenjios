@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Briefing — Google Ads + Site</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#0B0E11;--bg2:#11151A;--card:#161B21;--line:rgba(255,255,255,.09);--txt:#F4F6F5;--muted:#9AA4AE;--accent:#00E676;--wa:#25D366}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{overflow-x:hidden;max-width:100%}
+  body{background:var(--bg);color:var(--txt);font-family:'Inter',sans-serif;line-height:1.5;padding:0 0 120px}
+  .wrap{max-width:800px;margin:0 auto;padding:0 20px}
+  .hero{background:radial-gradient(800px 420px at 78% -20%,rgba(0,230,118,.14),transparent 62%);border-bottom:1px solid var(--line);padding:54px 0 40px}
+  .eyebrow{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.22em;color:var(--accent);margin-bottom:12px}
+  h1{font-size:clamp(28px,5vw,44px);font-weight:900;letter-spacing:-.03em;line-height:1.05;text-wrap:balance}
+  .hero p{color:var(--muted);font-size:17px;margin-top:14px;max-width:600px}
+  .sec{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:26px 24px;margin-top:22px}
+  .sec .st{display:flex;align-items:center;gap:12px;margin-bottom:6px}
+  .sec .num{width:34px;height:34px;border-radius:50%;background:rgba(0,230,118,.14);border:1px solid rgba(0,230,118,.4);color:var(--accent);display:grid;place-items:center;font-weight:800;flex-shrink:0}
+  .sec h2{font-size:21px;font-weight:800;letter-spacing:-.02em}
+  .sec .desc{color:var(--muted);font-size:14px;margin:0 0 16px 46px}
+  .field{margin-top:16px}
+  .g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  label{display:block;font-size:13.5px;font-weight:700;margin-bottom:6px}
+  label .opt{color:var(--muted);font-weight:500;font-size:12px}
+  input,textarea,select{width:100%;background:#0D1117;border:1px solid var(--line);border-radius:10px;padding:12px 14px;color:var(--txt);font-family:inherit;font-size:15px}
+  input:focus,textarea:focus,select:focus{outline:none;border-color:var(--accent)}
+  textarea{min-height:80px;resize:vertical}
+  .hint{font-size:12px;color:var(--muted);margin-top:5px}
+  .bar{position:fixed;left:0;right:0;bottom:0;background:rgba(11,14,17,.92);backdrop-filter:blur(8px);border-top:1px solid var(--line);padding:14px 20px;z-index:9}
+  .bar .in{max-width:800px;margin:0 auto;display:flex;gap:12px;justify-content:flex-end;flex-wrap:wrap}
+  .btn{background:var(--wa);color:#04140B;font-weight:800;font-size:16px;padding:14px 26px;border-radius:12px;border:none;cursor:pointer;transition:.15s}
+  .btn:hover{filter:brightness(1.06)}
+  .btn2{background:transparent;color:var(--txt);border:1px solid var(--line)}
+  .toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:var(--accent);color:#04140B;font-weight:800;padding:12px 22px;border-radius:10px;opacity:0;transition:.25s;pointer-events:none;z-index:20}
+  .toast.on{opacity:1}
+  @media(max-width:600px){.g2{grid-template-columns:1fr}.bar .in{justify-content:stretch}.bar .btn{flex:1}}
+</style>
+</head>
+<body>
+
+<div class="hero"><div class="wrap">
+  <div class="eyebrow">Briefing · Google Ads + Site</div>
+  <h1>Vamos montar seus anúncios e seu site do jeito certo.</h1>
+  <p>Responde o que souber — o que não souber, a gente vê junto depois. Leva ~10 min e é isto que faz o Google Ads trazer cliente de verdade (e não queimar dinheiro). No fim, é só clicar em <b style="color:var(--txt)">Enviar</b>.</p>
+</div></div>
+
+<div class="wrap">
+
+  <!-- 1. NEGÓCIO -->
+  <div class="sec">
+    <div class="st"><div class="num">1</div><h2>Seu negócio</h2></div>
+    <div class="desc">O básico pra eu entender quem você é.</div>
+    <div class="g2">
+      <div class="field"><label>Nome do negócio</label><input data-q="Negócio" placeholder="Ex: Chaveiro Alcazar"></div>
+      <div class="field"><label>Seu nome (responsável)</label><input data-q="Responsável" placeholder="Com quem eu falo"></div>
+    </div>
+    <div class="field"><label>O que você faz / vende?</label><textarea data-q="O que faz" placeholder="Ex: chaveiro 24h, cópia de chave, abertura de porta, chaveiro automotivo…"></textarea></div>
+    <div class="g2">
+      <div class="field"><label>Cidade que atende</label><input data-q="Cidade" placeholder="Ex: Maringá - PR"></div>
+      <div class="field"><label>Raio de atendimento <span class="opt">(km)</span></label><input data-q="Raio (km)" placeholder="Ex: até 20 km / a cidade toda"></div>
+    </div>
+    <div class="field"><label>Quanto vale, em média, um cliente pra você? <span class="opt">(ticket médio)</span></label><input data-q="Ticket médio" placeholder="Ex: R$ 120 por serviço"><div class="hint">Isso me ajuda a saber quanto vale pagar por um clique/lead.</div></div>
+  </div>
+
+  <!-- 2. GOOGLE ADS -->
+  <div class="sec">
+    <div class="st"><div class="num">2</div><h2>Seus anúncios no Google</h2></div>
+    <div class="desc">O que vamos anunciar e como o cliente te encontra.</div>
+    <div class="field"><label>Quais serviços dão MAIS dinheiro? <span class="opt">(o que priorizar)</span></label><textarea data-q="Serviços prioritários" placeholder="Ex: abertura de porta e chaveiro automotivo são os que mais fecham"></textarea></div>
+    <div class="g2">
+      <div class="field"><label>O que você quer que o cliente faça?</label>
+        <select data-q="Objetivo"><option value="">Escolha…</option><option>Chamar no WhatsApp</option><option>Ligar</option><option>Preencher formulário</option><option>Ir até o local</option></select></div>
+      <div class="field"><label>Pra onde mando o cliente?</label><input data-q="Destino do lead" placeholder="Ex: WhatsApp (44) 9....."></div>
+    </div>
+    <div class="field"><label>Por que escolher você? <span class="opt">(diferenciais reais)</span></label><textarea data-q="Diferenciais" placeholder="Ex: atendo 24h, chego em 20 min, X anos de mercado, orçamento na hora, garantia…"></textarea></div>
+    <div class="g2">
+      <div class="field"><label>Horário de atendimento</label><input data-q="Horário" placeholder="Ex: 24h / Seg-Sáb 8h-18h"></div>
+      <div class="field"><label>Quanto pretende investir em anúncio? <span class="opt">(mídia/mês)</span></label><input data-q="Verba de mídia" placeholder="Ex: R$ 600/mês"></div>
+    </div>
+    <div class="field"><label>Concorrentes que você conhece <span class="opt">(opcional)</span></label><input data-q="Concorrentes" placeholder="Nomes de quem compete com você"></div>
+    <div class="g2">
+      <div class="field"><label>Já anunciou no Google antes?</label>
+        <select data-q="Já anunciou"><option value="">Escolha…</option><option>Não, nunca</option><option>Sim, mas parei</option><option>Sim, ainda rodo</option></select></div>
+      <div class="field"><label>Já tem conta no Google Ads? <span class="opt">(ID, se souber)</span></label><input data-q="Conta Google Ads" placeholder="Ex: 123-456-7890 ou 'não tenho'"></div>
+    </div>
+  </div>
+
+  <!-- 3. LANDING PAGE -->
+  <div class="sec">
+    <div class="st"><div class="num">3</div><h2>Seu site / landing page</h2></div>
+    <div class="desc">Pra eu montar a página que transforma o clique em contato.</div>
+    <div class="field"><label>Frase principal / o que você quer gritar no topo <span class="opt">(opcional)</span></label><input data-q="Frase principal" placeholder="Ex: Chaveiro 24h em Maringá — chegamos rápido"></div>
+    <div class="g2">
+      <div class="field"><label>Tem logo?</label>
+        <select data-q="Logo"><option value="">Escolha…</option><option>Sim, tenho o arquivo</option><option>Tenho, mas de baixa qualidade</option><option>Não tenho</option></select></div>
+      <div class="field"><label>Cores da marca <span class="opt">(se tiver)</span></label><input data-q="Cores" placeholder="Ex: azul e amarelo"></div>
+    </div>
+    <div class="field"><label>Provas de confiança <span class="opt">(o que te dá autoridade)</span></label><textarea data-q="Provas/autoridade" placeholder="Ex: 12 anos de mercado, +2.000 atendimentos, nota 4,9 no Google, atende a cidade toda…"></textarea></div>
+    <div class="field"><label>Tem depoimentos de clientes? <span class="opt">(cole 1-3 se tiver)</span></label><textarea data-q="Depoimentos" placeholder="Ex: 'Salvou minha noite, chegou em 15 min' — João"></textarea></div>
+    <div class="field"><label>Tem fotos? <span class="opt">(do trabalho, equipe, local, antes/depois)</span></label>
+      <select data-q="Fotos"><option value="">Escolha…</option><option>Sim, tenho boas fotos</option><option>Tenho algumas no celular</option><option>Não tenho, usar imagens genéricas</option></select></div>
+    <div class="g2">
+      <div class="field"><label>WhatsApp pra exibir</label><input data-q="WhatsApp exibir" placeholder="(44) 9....."></div>
+      <div class="field"><label>Telefone / outros contatos</label><input data-q="Outros contatos" placeholder="Fixo, e-mail…"></div>
+    </div>
+    <div class="g2">
+      <div class="field"><label>Instagram / redes <span class="opt">(opcional)</span></label><input data-q="Redes sociais" placeholder="@seu_insta"></div>
+      <div class="field"><label>Endereço <span class="opt">(se atende no local)</span></label><input data-q="Endereço" placeholder="Rua, bairro"></div>
+    </div>
+    <div class="field"><label>Já tem site ou domínio? <span class="opt">(opcional)</span></label><input data-q="Site/domínio atual" placeholder="Ex: seusite.com.br ou 'não tenho'"></div>
+    <div class="field"><label>Algum site que você gosta / quer parecido? <span class="opt">(referência)</span></label><input data-q="Referência de site" placeholder="Cole um link ou descreva"></div>
+    <div class="field"><label>Mais alguma coisa importante que eu preciso saber?</label><textarea data-q="Observações" placeholder="Restrições, promoções, o que NÃO fazer, tom da marca…"></textarea></div>
+  </div>
+
+</div>
+
+<div class="bar"><div class="in">
+  <button class="btn btn2" onclick="copiar()">📋 Copiar respostas</button>
+  <button class="btn" onclick="enviar()">📲 Enviar respostas</button>
+</div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+const WHATS = "5544999271916"; // número do Kenji
+function coletar(){
+  const parts = [];
+  document.querySelectorAll("[data-q]").forEach(el=>{
+    const v = (el.value||"").trim();
+    if(v) parts.push(`• ${el.dataset.q}: ${v}`);
+  });
+  const neg = (document.querySelector('[data-q="Negócio"]').value||"").trim();
+  return { titulo: `📋 BRIEFING${neg?" — "+neg:""}`, corpo: parts.join("\n") };
+}
+function toast(msg){ const t=document.getElementById("toast"); t.textContent=msg; t.classList.add("on"); setTimeout(()=>t.classList.remove("on"),2600); }
+function copiar(){
+  const d = coletar();
+  if(!d.corpo){ toast("Preencha ao menos alguns campos 🙂"); return; }
+  navigator.clipboard.writeText(d.titulo+"\n\n"+d.corpo).then(()=>toast("Copiado! Cola no meu WhatsApp e envia."));
+}
+function enviar(){
+  const d = coletar();
+  if(!d.corpo){ toast("Preencha ao menos alguns campos 🙂"); return; }
+  window.open("https://wa.me/"+WHATS+"?text="+encodeURIComponent(d.titulo+"\n\n"+d.corpo), "_blank");
+}
+</script>
+</body>
+</html>
