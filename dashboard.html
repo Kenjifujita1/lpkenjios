@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seu Google Ads — Painel de Resultados</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  :root{--bg:#0B0E11;--bg2:#11151A;--card:#161B21;--line:rgba(255,255,255,.08);--txt:#F4F6F5;--muted:#9AA4AE;--accent:#00E676;--blue:#5B9DFF;--amber:#FFC857;--purple:#B98AFF}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{overflow-x:hidden}
+  body{background:var(--bg);color:var(--txt);font-family:'Inter',sans-serif;line-height:1.5;padding:0 0 60px}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 22px}
+  .num{font-variant-numeric:tabular-nums}
+  /* topbar */
+  .top{background:radial-gradient(800px 400px at 82% -30%,rgba(0,230,118,.13),transparent 60%);border-bottom:1px solid var(--line);padding:34px 0 26px}
+  .top .in{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap}
+  .top .lbl{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.2em;color:var(--accent);margin-bottom:8px}
+  .top h1{font-size:clamp(24px,3.6vw,34px);font-weight:900;letter-spacing:-.02em}
+  .top .per{color:var(--muted);font-size:15px;margin-top:4px}
+  .badges{display:flex;gap:10px;flex-wrap:wrap}
+  .b{display:inline-flex;align-items:center;gap:7px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:8px 14px;font-size:13px;font-weight:700}
+  .b.ok{border-color:rgba(0,230,118,.4);color:var(--accent)}
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent)}
+  /* sections */
+  section{margin-top:34px}
+  .stitle{font-size:20px;font-weight:800;letter-spacing:-.01em}
+  .sdesc{color:var(--muted);font-size:14.5px;margin-top:3px;margin-bottom:16px;max-width:720px}
+  .grid{display:grid;gap:16px}
+  .k4{grid-template-columns:repeat(4,1fr)}.k2{grid-template-columns:repeat(2,1fr)}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;border-top:3px solid var(--accent)}
+  .kpi .ic{font-size:20px}
+  .kpi .v{font-size:clamp(30px,4vw,40px);font-weight:900;letter-spacing:-.03em;margin:8px 0 2px;line-height:1}
+  .kpi .t{font-size:13.5px;color:var(--muted);font-weight:600}
+  .kpi.b1{border-top-color:var(--blue)}.kpi.b2{border-top-color:var(--accent)}.kpi.b3{border-top-color:var(--amber)}.kpi.b4{border-top-color:var(--purple)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px}
+  /* funil */
+  .funil{display:flex;flex-direction:column;gap:12px;margin-top:6px}
+  .step{display:flex;align-items:center;gap:16px}
+  .step .bar{height:52px;border-radius:10px;display:flex;align-items:center;padding:0 18px;font-weight:800;color:#04140B;font-size:17px;white-space:nowrap;min-width:120px}
+  .step .lb{color:var(--muted);font-size:14px}
+  .step .lb b{color:var(--txt);font-size:15px;display:block}
+  /* keywords */
+  table{width:100%;border-collapse:collapse}
+  th,td{text-align:left;padding:12px 10px;border-bottom:1px solid var(--line);font-size:14px}
+  th{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:800}
+  td.n{text-align:right;font-variant-numeric:tabular-nums}
+  .kw{font-weight:600}
+  .kwbar{height:6px;border-radius:4px;background:var(--accent);margin-top:5px;opacity:.85}
+  .win{color:var(--accent);font-weight:800}
+  /* rastreio */
+  .track{background:linear-gradient(160deg,rgba(0,230,118,.07),var(--card));border:1px solid rgba(0,230,118,.3);border-radius:16px;padding:26px}
+  .track .row{display:flex;gap:14px;align-items:flex-start;margin-top:14px}
+  .track .chk{width:26px;height:26px;border-radius:50%;background:rgba(0,230,118,.15);border:1px solid rgba(0,230,118,.5);color:var(--accent);display:grid;place-items:center;font-weight:900;flex-shrink:0}
+  .track .row div b{color:var(--txt)}.track .row div{color:var(--muted);font-size:14.5px}
+  .foot{margin-top:40px;text-align:center;color:var(--muted);font-size:13px;border-top:1px solid var(--line);padding-top:26px}
+  .chartbox{position:relative;height:260px}
+  @media(max-width:820px){.k4{grid-template-columns:1fr 1fr}.k2{grid-template-columns:1fr}}
+  @media(max-width:520px){.k4{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="top"><div class="wrap in">
+  <div>
+    <div class="lbl">Painel de Resultados · Google Ads</div>
+    <h1 id="tt">Clínica de Podologia Exemplo</h1>
+    <div class="per" id="per">Período: 01 a 20 de julho de 2026</div>
+  </div>
+  <div class="badges">
+    <div class="b ok"><span class="dot"></span> Rastreamento ativo</div>
+    <div class="b" id="upd">Atualizado hoje</div>
+  </div>
+</div></div>
+
+<div class="wrap">
+
+  <!-- KPIs -->
+  <section>
+    <div class="stitle">Os números que importam</div>
+    <div class="sdesc">O resumo do seu investimento e do que ele trouxe. Simples assim.</div>
+    <div class="grid k4">
+      <div class="kpi b1"><div class="ic">💰</div><div class="v num" id="k-inv">R$ 480</div><div class="t">Investido nos anúncios</div></div>
+      <div class="kpi b2"><div class="ic">📞</div><div class="v num" id="k-con">41</div><div class="t">Pessoas que te chamaram</div></div>
+      <div class="kpi b3"><div class="ic">🎯</div><div class="v num" id="k-cpc">R$ 11,70</div><div class="t">Custo por contato</div></div>
+      <div class="kpi b4"><div class="ic">👀</div><div class="v num" id="k-imp">8.412</div><div class="t">Vezes que te mostraram</div></div>
+    </div>
+  </section>
+
+  <!-- FUNIL / ATRIBUIÇÃO -->
+  <section>
+    <div class="stitle">De onde vieram seus contatos</div>
+    <div class="sdesc">Todo mundo aqui te achou <b style="color:var(--txt)">pelo Google</b>. Este é o caminho que a pessoa fez até te chamar — a prova de que o resultado veio dos anúncios.</div>
+    <div class="card">
+      <div class="funil" id="funil"></div>
+      <p style="color:var(--muted);font-size:13.5px;margin-top:16px">💡 De cada 100 pessoas que clicaram no seu anúncio, cerca de <b style="color:var(--txt)" id="taxa">13</b> te chamaram. Boa parte fecha — o resto fica te conhecendo.</p>
+    </div>
+  </section>
+
+  <!-- EVOLUÇÃO -->
+  <section>
+    <div class="stitle">Seus contatos ao longo do tempo</div>
+    <div class="sdesc">Cada barrinha é um dia. Veja os contatos chegando — e como a gente foi melhorando na medida que a campanha rodou.</div>
+    <div class="card"><div class="chartbox"><canvas id="evo"></canvas></div></div>
+  </section>
+
+  <!-- PALAVRAS -->
+  <section>
+    <div class="stitle">As buscas que trazem cliente</div>
+    <div class="sdesc">Quando alguém digita isto no Google, o seu anúncio aparece. As <span class="win">verdes</span> são as que mais trouxeram contato — é nelas que a gente reforça o investimento.</div>
+    <div class="grid k2">
+      <div class="card" style="padding:14px 20px">
+        <table><thead><tr><th>O que a pessoa buscou</th><th class="n">Cliques</th><th class="n">Contatos</th></tr></thead>
+        <tbody id="kwtb"></tbody></table>
+      </div>
+      <div class="card"><div class="stitle" style="font-size:15px;margin-bottom:4px">Contatos por busca</div><div class="sdesc" style="margin-bottom:8px">De onde saíram os 41 contatos.</div><div class="chartbox" style="height:230px"><canvas id="donut"></canvas></div></div>
+    </div>
+  </section>
+
+  <!-- PRA ONDE VAI O DINHEIRO -->
+  <section>
+    <div class="stitle">Pra onde vai o seu dinheiro</div>
+    <div class="sdesc">Transparência total: o valor investido vai <b style="color:var(--txt)">100% pro Google</b> como mídia (é o que faz seu anúncio aparecer). A minha gestão é um valor à parte, combinado com você.</div>
+    <div class="grid k2">
+      <div class="card"><div class="v num" style="font-size:34px;font-weight:900">R$ 480,00</div><div style="color:var(--muted);font-size:14px;margin-top:4px">foi 100% pra mídia no Google, no período. Nada de taxa escondida.</div>
+        <div style="margin-top:16px;font-size:14px;color:var(--muted)">📅 Você paga direto no <b style="color:var(--txt)">seu cartão</b>, no Google — então enxerga cada centavo e controla quando quiser.</div>
+      </div>
+      <div class="card"><div class="stitle" style="font-size:15px;margin-bottom:10px">Média por dia</div>
+        <div class="v num" style="font-size:34px;font-weight:900;color:var(--accent)">R$ 24,00</div>
+        <div style="color:var(--muted);font-size:14px;margin-top:4px">investido por dia pra manter seu anúncio no ar.</div>
+        <div style="margin-top:16px;font-size:14px;color:var(--muted)">Dá pra subir ou baixar a qualquer momento — quanto mais investe, mais gente vê (e mais contato chega).</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RASTREAMENTO -->
+  <section>
+    <div class="stitle">Como sabemos que o cliente veio do Google</div>
+    <div class="sdesc">A pergunta mais importante — e a que muita "gestão" não sabe responder. Aqui está:</div>
+    <div class="track">
+      <div class="row"><div class="chk">✓</div><div><b>Cada clique no seu WhatsApp é marcado.</b> Quando alguém aperta o botão do seu anúncio pra te chamar, o sistema registra como um "contato". É isso que vira o número 41 lá em cima.</div></div>
+      <div class="row"><div class="chk">✓</div><div><b>Toda ligação pelo anúncio é contada.</b> Se a pessoa liga direto do Google, o próprio Google avisa — e a gente conta.</div></div>
+      <div class="row"><div class="chk">✓</div><div><b>Você consegue conferir.</b> Quando o cliente te chamar, ele geralmente vem com "vi vocês no Google". Bate com o número daqui — sem achismo, sem "confia em mim".</div></div>
+    </div>
+  </section>
+
+  <div class="foot">Painel gerado por <b style="color:var(--txt)">Kenji · Gestão de Google Ads</b> · dados reais da sua conta · (44) 99927-1916</div>
+</div>
+
+<script>
+const DATA = {
+  cliente:"Clínica de Podologia Exemplo", periodo:"01 a 20 de julho de 2026",
+  investido:480, impressoes:8412, cliques:327, contatos:41,
+  keywords:[
+    {t:"podóloga perto de mim", cl:120, co:18},
+    {t:"unha encravada maringá", cl:78, co:12},
+    {t:"tratamento de calos maringá", cl:45, co:6},
+    {t:"podologia maringá", cl:52, co:4},
+    {t:"remover calosidade", cl:32, co:1}
+  ],
+  porDia:[1,0,2,1,3,2,1,2,3,2,4,2,3,1,4,2,3,2,3,0].map((c,i)=>({d:(i+1),c}))
+};
+const brl=n=>"R$ "+n.toLocaleString("pt-BR",{minimumFractionDigits:2,maximumFractionDigits:2});
+const int=n=>n.toLocaleString("pt-BR");
+// KPIs
+document.getElementById("tt").textContent=DATA.cliente;
+document.getElementById("per").textContent="Período: "+DATA.periodo;
+document.getElementById("k-inv").textContent="R$ "+int(DATA.investido);
+document.getElementById("k-con").textContent=int(DATA.contatos);
+document.getElementById("k-cpc").textContent=brl(DATA.investido/DATA.contatos);
+document.getElementById("k-imp").textContent=int(DATA.impressoes);
+document.getElementById("taxa").textContent=Math.round(DATA.contatos/DATA.cliques*100);
+// Funil
+const steps=[
+  {lb:"Viram seu anúncio", v:DATA.impressoes, c:"#5B9DFF", w:100, sub:"apareceu no Google"},
+  {lb:"Clicaram pra saber mais", v:DATA.cliques, c:"#FFC857", w:55, sub:"entraram no seu contato"},
+  {lb:"Te chamaram", v:DATA.contatos, c:"#00E676", w:26, sub:"viraram oportunidade de cliente"}
+];
+document.getElementById("funil").innerHTML=steps.map(s=>`<div class="step">
+  <div class="bar" style="background:${s.c};width:${s.w}%">${int(s.v)}</div>
+  <div class="lb"><b>${s.lb}</b>${s.sub}</div></div>`).join("");
+// Keywords table
+const maxco=Math.max(...DATA.keywords.map(k=>k.co));
+document.getElementById("kwtb").innerHTML=DATA.keywords.map(k=>{
+  const win=k.co>=6; return `<tr>
+   <td class="kw">${win?'<span class="win">● </span>':''}${k.t}<div class="kwbar" style="width:${Math.round(k.co/maxco*100)}%;${win?'':'opacity:.35'}"></div></td>
+   <td class="n">${k.cl}</td><td class="n ${win?'win':''}">${k.co}</td></tr>`;
+}).join("");
+// Charts
+Chart.defaults.color="#9AA4AE"; Chart.defaults.font.family="Inter";
+new Chart(document.getElementById("evo"),{type:"bar",
+  data:{labels:DATA.porDia.map(d=>d.d),datasets:[{data:DATA.porDia.map(d=>d.c),backgroundColor:"#00E676",borderRadius:5,maxBarThickness:22}]},
+  options:{plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.raw+" contato(s)"}}},
+    scales:{x:{grid:{display:false},title:{display:true,text:"dia do mês"}},y:{grid:{color:"rgba(255,255,255,.06)"},ticks:{precision:0},beginAtZero:true}},maintainAspectRatio:false}});
+new Chart(document.getElementById("donut"),{type:"doughnut",
+  data:{labels:DATA.keywords.map(k=>k.t),datasets:[{data:DATA.keywords.map(k=>k.co),
+    backgroundColor:["#00E676","#5B9DFF","#FFC857","#B98AFF","#4b5563"],borderColor:"#161B21",borderWidth:3}]},
+  options:{cutout:"62%",plugins:{legend:{position:"bottom",labels:{boxWidth:10,font:{size:11},padding:10}}},maintainAspectRatio:false}});
+</script>
+</body>
+</html>
