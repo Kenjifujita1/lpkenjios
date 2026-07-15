@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agendar 15 min — Gestão de Google Ads</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#0B0E11;--bg2:#11151A;--card:#161B21;--line:rgba(255,255,255,.08);
+    --txt:#F4F6F5;--muted:#9AA4AE;--accent:#00E676;--accent-d:#00C264;--warn:#FFC857}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--txt);font-family:'Inter',sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+  html,body{overflow-x:hidden;max-width:100%}
+  .wrap{max-width:680px;margin:0 auto;padding:0 22px}
+  header{text-align:center;padding:56px 0 8px;background:radial-gradient(900px 460px at 50% -20%,rgba(0,230,118,.14),transparent 62%)}
+  .badge{display:inline-flex;align-items:center;gap:9px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:8px 16px;font-size:13px;font-weight:600;color:var(--muted);margin-bottom:22px}
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent)}
+  h1{font-size:clamp(28px,5vw,42px);font-weight:900;line-height:1.06;letter-spacing:-.03em;text-wrap:balance}
+  h1 .accent{color:var(--accent)}
+  .sub{font-size:clamp(16px,2vw,19px);color:var(--muted);font-weight:500;max-width:520px;margin:16px auto 0}
+  .steps{display:flex;gap:8px;justify-content:center;margin:26px 0 0;font-size:13px;font-weight:700;color:var(--muted)}
+  .steps b{color:var(--accent)}
+  main{padding:34px 0 70px}
+  form{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:30px 26px}
+  .fld{margin-bottom:18px}
+  label{display:block;font-size:14px;font-weight:700;margin-bottom:7px}
+  label .req{color:var(--accent)}
+  label small{display:block;font-weight:500;color:var(--muted);font-size:12.5px;margin-top:2px}
+  input,select,textarea{width:100%;background:#0D1117;border:1px solid var(--line);border-radius:11px;padding:13px 14px;color:var(--txt);font:inherit;font-size:15px}
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent)}
+  textarea{min-height:76px;resize:vertical}
+  select{appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%239AA4AE' stroke-width='3'><path d='M6 9l6 6 6-6'/></svg>");background-repeat:no-repeat;background-position:right 14px center}
+  .g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:560px){.g2{grid-template-columns:1fr}}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;width:100%;background:var(--accent);color:#04140B;font-weight:800;font-size:18px;padding:18px;border-radius:14px;border:none;cursor:pointer;font-family:inherit;letter-spacing:-.01em;transition:.15s;box-shadow:0 12px 34px rgba(0,230,118,.24);margin-top:6px}
+  .btn:hover{transform:translateY(-2px);filter:brightness(1.05)}
+  .err{color:#FF6B6B;font-size:13px;font-weight:600;margin-top:10px;text-align:center;min-height:16px}
+  .privacy{text-align:center;color:var(--muted);font-size:12.5px;margin-top:14px}
+  /* etapa 2 */
+  #etapa2{display:none}
+  .ok{background:linear-gradient(160deg,rgba(0,230,118,.10),var(--card));border:1px solid rgba(0,230,118,.3);border-radius:18px;padding:22px 24px;text-align:center;margin-bottom:20px}
+  .ok .big{font-size:22px;font-weight:900;letter-spacing:-.02em}
+  .ok p{color:var(--muted);font-size:15px;margin-top:6px}
+  #cal-inline{min-height:600px;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--card)}
+  footer{border-top:1px solid var(--line);padding:30px 0;text-align:center;color:var(--muted);font-size:13px}
+  footer a{color:var(--muted)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="badge"><span class="dot"></span> Teste de 30 dias · Gestão de Google Ads</div>
+    <h1 id="titulo">Falta <span class="accent">1 minuto</span> pra marcar sua conversa.</h1>
+    <p class="sub" id="subtitulo">Responde essas perguntas rápidas pra eu já chegar na reunião entendendo o seu negócio — assim os 15 minutos rendem de verdade. Depois é só escolher o horário.</p>
+    <div class="steps" id="steps"><span><b>1.</b> Suas informações</span><span>›</span><span>2. Escolher horário</span></div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <!-- ETAPA 1 — questionário -->
+    <form id="form" novalidate>
+      <div class="fld">
+        <label>Seu nome <span class="req">*</span></label>
+        <input type="text" id="nome" autocomplete="name" placeholder="Como posso te chamar?">
+      </div>
+      <div class="g2">
+        <div class="fld">
+          <label>WhatsApp <span class="req">*</span></label>
+          <input type="tel" id="whats" autocomplete="tel" placeholder="(00) 00000-0000">
+        </div>
+        <div class="fld">
+          <label>E-mail <span class="req">*</span><small>pra enviar o convite da reunião</small></label>
+          <input type="email" id="email" autocomplete="email" placeholder="seu@email.com">
+        </div>
+      </div>
+      <div class="fld">
+        <label>Seu negócio — o que você faz/vende <span class="req">*</span></label>
+        <input type="text" id="negocio" placeholder="Ex: clínica de estética, energia solar, advocacia...">
+      </div>
+      <div class="g2">
+        <div class="fld">
+          <label>Instagram <small>opcional</small></label>
+          <input type="text" id="insta" placeholder="@seu_perfil">
+        </div>
+        <div class="fld">
+          <label>Cidade <small>onde atende</small></label>
+          <input type="text" id="cidade" placeholder="Cidade / região">
+        </div>
+      </div>
+      <div class="fld">
+        <label>Quanto pretende investir por mês em anúncios? <span class="req">*</span><small>é o valor que vai pro Google, à parte da gestão</small></label>
+        <select id="verba">
+          <option value="" selected disabled>Selecione uma faixa</option>
+          <option>R$ 500</option>
+          <option>R$ 500 a R$ 1.000</option>
+          <option>Acima de R$ 1.000</option>
+          <option>Ainda não sei dizer</option>
+        </select>
+      </div>
+      <div class="fld">
+        <label>O que você mais quer resolver? <small>opcional — me ajuda a preparar a conversa</small></label>
+        <textarea id="objetivo" placeholder="Ex: quero mais clientes chegando no WhatsApp, hoje dependo só de indicação..."></textarea>
+      </div>
+      <button type="submit" class="btn">Continuar pro horário →</button>
+      <div class="err" id="erro"></div>
+      <p class="privacy">🔒 Suas informações vão só pra mim, pra preparar a reunião.</p>
+    </form>
+
+    <!-- ETAPA 2 — agendamento (revelado após o form) -->
+    <div id="etapa2">
+      <div class="ok">
+        <div class="big" id="okTitulo">Perfeito! Agora escolhe o melhor horário 👇</div>
+        <p>São 15 minutos, sem compromisso. Você recebe o convite por e-mail com o link da chamada.</p>
+      </div>
+      <div id="cal-inline"></div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">Gestão de Google Ads · Teste de 30 dias · <a href="index.html">voltar pra proposta</a></div>
+</footer>
+
+<script type="text/javascript">
+  // ===================================================================
+  //  Link do evento no Cal.com (trocar aqui se mudar o evento)
+  const CAL_LINK = "kenji-fujita/15min";
+  // ===================================================================
+  const CAL_NS = "agendar";
+
+  // loader oficial do Cal.com
+  (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); } else p(cal, ar); return; } p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+
+  const $ = function (id) { return document.getElementById(id); };
+
+  function val(id) { return ($(id).value || "").trim(); }
+
+  function validar() {
+    const obrig = [["nome", "seu nome"], ["whats", "seu WhatsApp"], ["email", "seu e-mail"], ["negocio", "seu negócio"], ["verba", "a faixa de investimento"]];
+    for (const [id, rot] of obrig) { if (!val(id)) return "Preenche " + rot + " pra continuar."; }
+    const em = val("email");
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)) return "Confere o e-mail — parece que faltou algo.";
+    return "";
+  }
+
+  function montarNotas() {
+    const linhas = [
+      "Negócio: " + val("negocio"),
+      "Investimento/mês: " + val("verba"),
+      "WhatsApp: " + val("whats"),
+      val("insta") ? "Instagram: " + val("insta") : "",
+      val("cidade") ? "Cidade: " + val("cidade") : "",
+      val("objetivo") ? "Objetivo: " + val("objetivo") : ""
+    ].filter(Boolean);
+    return linhas.join("\n");
+  }
+
+  $("form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    const msg = validar();
+    if (msg) { $("erro").textContent = msg; return; }
+    $("erro").textContent = "";
+
+    // esconde o formulário, revela o agendamento
+    $("form").style.display = "none";
+    $("titulo").innerHTML = "Última etapa: <span class='accent'>escolha o horário</span>.";
+    $("subtitulo").textContent = "Já anotei suas informações. Agora é só marcar o melhor dia e hora pra gente conversar 15 minutos.";
+    $("steps").innerHTML = "<span>1. Suas informações ✓</span><span>›</span><span><b>2.</b> Escolher horário</span>";
+    $("etapa2").style.display = "block";
+    $("okTitulo").textContent = "Perfeito, " + val("nome").split(" ")[0] + "! Agora escolhe o melhor horário 👇";
+
+    // inicia o Cal já com os dados preenchidos (viajam pro evento na sua agenda)
+    Cal("init", CAL_NS, { origin: "https://cal.com" });
+    Cal.ns[CAL_NS]("inline", {
+      elementOrSelector: "#cal-inline",
+      calLink: CAL_LINK,
+      config: { name: val("nome"), email: val("email"), notes: montarNotas(), layout: "month_view", theme: "dark" }
+    });
+    Cal.ns[CAL_NS]("ui", { hideEventTypeDetails: false, layout: "month_view", theme: "dark" });
+
+    $("etapa2").scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+</script>
+
+</body>
+</html>
